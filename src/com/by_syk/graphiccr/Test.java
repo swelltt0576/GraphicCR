@@ -18,35 +18,29 @@ package com.by_syk.graphiccr;
 
 import java.io.File;
 
-import com.by_syk.graphiccr.core.GraphicC1Translator;
-import com.by_syk.graphiccr.core.GraphicC2Translator;
-import com.by_syk.graphiccr.core.GraphicC3Translator;
-import com.by_syk.graphiccr.core.GraphicC4Translator;
-import com.by_syk.graphiccr.core.GraphicC5Translator;
-import com.by_syk.graphiccr.core.GraphicC6Translator;
-import com.by_syk.graphiccr.core.GraphicC7Translator;
+import com.by_syk.graphiccr.core.*;
 import com.by_syk.graphiccr.util.ExtraUtil;
 
 public class Test {
     public static void main(String[] args) {
-        testGraphicC7();
+        testGraphicC11();
     }
     
     private static void testGraphicC1() {
-        File testDir = new File("E:/JavaProjects/GraphicCR/reserve/GraphicC/1/test");
+        File testDir = new File("c:/Users/swell/Pictures/ocr/1/");
         
-        for (int i = 0; i < 10; ++i) {
-            ExtraUtil.downloadFile("http://jwpt.neuq.edu.cn/ACTIONVALIDATERANDOMPICTURE.APPPROCESS",
-                    new File(testDir, System.currentTimeMillis() + ".jpg"));
-            System.out.println("DOWNLOAD TEST " + (i + 1));
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+//        for (int i = 0; i < 10; ++i) {
+//            ExtraUtil.downloadFile("http://jwpt.neuq.edu.cn/ACTIONVALIDATERANDOMPICTURE.APPPROCESS",
+//                    new File(testDir, System.currentTimeMillis() + ".jpg"));
+//            System.out.println("DOWNLOAD TEST " + (i + 1));
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
         
-        System.out.println("DOWNLOAD TEST DONE");
+//        System.out.println("DOWNLOAD TEST DONE");
 
         GraphicC1Translator translator = GraphicC1Translator.getInstance();
         for (File file : testDir.listFiles()) {
@@ -55,6 +49,19 @@ public class Test {
             System.out.println("TRANSLATE " + result);
         }
         
+        System.out.println("TRANSLATE DONE");
+    }
+
+    private static void testGraphicC11() {
+        File testDir = new File("c:/Users/swell/Pictures/ocr/1/");
+
+        GraphicC11Translator translator = GraphicC11Translator.getInstance();
+        for (File file : testDir.listFiles()) {
+            String result = translator.translate(file);
+            file.renameTo(new File(file.getParentFile(), result + ".jpg"));
+            System.out.println("TRANSLATE " + result);
+        }
+
         System.out.println("TRANSLATE DONE");
     }
     
